@@ -35,6 +35,12 @@ Welcome! This repository contains a **full rewrite** of the OneCompiler Embeddin
 
 Contributions welcome! Licensed under MIT. Embeds credit [OneCompiler](https://onecompiler.com).
 
+## Contributors
+
+- [github.com/jacksonhale](https://github.com/jacksonhale) — Complete redesign and rewrite of the website  
+- Original OneCompiler Team — For creating the open-source compiler platform and embeddable components  
+
 ---
 
 Thanks for checking out the rewrite! Reach out for help with deployment or enhancements.
+
