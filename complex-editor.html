@@ -1,127 +1,105 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Complex Editor Demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Complex Editor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
 </head>
 
 <body>
-    <nav class=" navbar navbar-expand-lg navbar-dark" style="background-color: #3498db;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">OneCompiler Embedding Demos</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3498db;">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="index.html">OneCompiler Embedding Demos</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Simple Editor</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="complex-editor.html">Complex Editor</a></li>
+          <li class="nav-item"><a class="nav-link" href="lab.html">Lab</a></li>
+          <li class="nav-item"><a class="nav-link" href="challenges.html">Challenges</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Simple Editor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="complex-editor.html">Complex Editor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="lab.html">Lab</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="challenges.html">Challenges</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <div class="container my-4 px-3">
+    <iframe id="oc-editor" src="https://onecompiler.com/embed/python?codeChangeEvent=true&listenToEvents=true&hideNew=true"
+      frameborder="0" width="100%" height="400px" title="Complex OneCompiler Editor"></iframe>
 
-    <div class="container">
-        <br /><br />
+    <p class="mt-3">Automatically catching content on parent's website</p>
 
-        <iframe frameBorder="0" height="400px" id="oc-editor" width="100%"
-            src="https://onecompiler.com/embed/python?codeChangeEvent=true&listenToEvents=true&hideNew=true"></iframe>
-
-        <br />
-        <p>automatically catching content on parent's website </p>
-
-        <div class="input-group">
-
-            <span class="input-group-text">code</span>
-
-            <textarea class="form-control" rows="10" aria-label="With textarea" id="parent-code-capture"></textarea>
-        </div>
-        <br />
-        <button type="button" onclick="javascript:triggerRun()" class="btn btn-primary">Trigger Run</button>
-        <button type="button" onclick="javascript:sendCodeToEditor()" class="btn btn-warning">
-            Send Code to Editor</button>
-
+    <div class="input-group mb-3">
+      <span class="input-group-text">Code</span>
+      <textarea class="form-control" rows="10" aria-label="Code capture" id="parent-code-capture"></textarea>
     </div>
 
-    <script>
-        window.onmessage = function (e) {
-            if (e.data && e.data.language) {
-                console.log(e.data)
-                document.getElementById('parent-code-capture').value = JSON.stringify(e.data, null, 2);
-            }
-        };
+    <button type="button" onclick="triggerRun()" class="btn btn-primary me-2">Trigger Run</button>
+    <button type="button" onclick="sendCodeToEditor()" class="btn btn-warning">Send Code to Editor</button>
+  </div>
 
-        function triggerRun() {
-            var iFrame = document.getElementById('oc-editor');
-            iFrame.contentWindow.postMessage({
-                eventType: 'triggerRun'
-            }, "*");
-        }
+  <script>
+    window.onmessage = function (e) {
+      if (e.data && e.data.language) {
+        console.log(e.data);
+        document.getElementById('parent-code-capture').value = JSON.stringify(e.data, null, 2);
+      }
+    };
 
-        function sendCodeToEditor() {
-            let currentCode = document.getElementById('parent-code-capture').value;
-            if (!currentCode) {
-                alert('No code to send');
-                return;
-            }
-            let currentCodeObj = JSON.parse(currentCode);
+    function triggerRun() {
+      const iFrame = document.getElementById('oc-editor');
+      iFrame.contentWindow.postMessage({
+        eventType: 'triggerRun'
+      }, "*");
+    }
 
-            if (!currentCodeObj.language) {
-                alert('Language missing');
-                return;
-            }
+    function sendCodeToEditor() {
+      let currentCode = document.getElementById('parent-code-capture').value;
+      if (!currentCode) {
+        alert('No code to send');
+        return;
+      }
+      let currentCodeObj;
+      try {
+        currentCodeObj = JSON.parse(currentCode);
+      } catch {
+        alert('Invalid JSON');
+        return;
+      }
 
-            if (!currentCodeObj.files || currentCodeObj.files.length === 0) {
-                alert('Files missing');
-                return;
-            }
+      if (!currentCodeObj.language) {
+        alert('Language missing');
+        return;
+      }
 
-            var iFrame = document.getElementById('oc-editor');
-            iFrame.contentWindow.postMessage({
-                eventType: 'populateCode',
-                language: currentCodeObj.language,
-                files: currentCodeObj.files,
-                stdin: currentCodeObj.stdin,
-                result: currentCodeObj.result
-            }, "*");
+      if (!currentCodeObj.files || currentCodeObj.files.length === 0) {
+        alert('Files missing');
+        return;
+      }
 
-        }
+      const iFrame = document.getElementById('oc-editor');
+      iFrame.contentWindow.postMessage({
+        eventType: 'populateCode',
+        language: currentCodeObj.language,
+        files: currentCodeObj.files,
+        stdin: currentCodeObj.stdin,
+        result: currentCodeObj.result
+      }, "*");
+    }
+  </script>
 
-    </script>
+  <footer style="max-width: 960px; margin: 2rem auto; padding: 1rem; font-size: 0.85rem; color: #666; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    This page integrates the online compiler provided by <a href="https://onecompiler.com" target="_blank" rel="noopener noreferrer">OneCompiler</a>,
+    an open-source project licensed under the MIT License. Full credit to the original developers and contributors.
+  </footer>
 
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 
 </html>
