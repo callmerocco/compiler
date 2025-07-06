@@ -37,8 +37,10 @@ Contributions welcome! Licensed under MIT. Embeds credit [OneCompiler](https://o
 
 ## Contributors
 
-- [github.com/jacksonhale](https://github.com/jacksonhale) — Complete redesign and rewrite of the website  
+- [![Jackson Hale](https://github.com/jacksonhale.png?size=40)](https://github.com/jacksonhale)  
+  [github.com/jacksonhale](https://github.com/jacksonhale) — Complete redesign and rewrite of the website  
 - Original OneCompiler Team — For creating the open-source compiler platform and embeddable components  
+
 
 ---
 
