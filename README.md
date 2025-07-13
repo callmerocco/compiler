@@ -37,7 +37,7 @@ Contributions welcome! Licensed under MIT. Embeds credit [OneCompiler](https://o
 
 ## Contributors
 
-  [github.com/junoswift13](https://github.com/junoswift13) — Complete redesign and rewrite of the website  
+  [github.com/callmerocco](https://github.com/callmerocco) — Complete redesign and rewrite of the website  
 - Original OneCompiler Team — For creating the open-source compiler platform and embeddable components  
 
 
