@@ -1,12 +1,12 @@
 
-
 > [!CAUTION]
 >
 > ## Deprecated
 >
 >This project is **no longer maintained** and should **not be used in production**.
+   <img src="https://img.shields.io/badge/%20DEPRECATED%20-%20DO%20NOT%20USE%20-red?style=for-the-badge&logo=github" alt="Deprecated Warn">
 
-## Status
+> ## Status
 - **Deprecated:** Yes  
 - **Maintenance:** None  
 - **Last Update:** July 15th 2025  
